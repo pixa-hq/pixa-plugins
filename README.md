@@ -14,13 +14,12 @@ Official Pixa plugin for **Claude**
 1. Add the marketplace to Claude
 
 - Select Customize from the Sidebar
-- Plugins -> "+" -> "Create Plugin" -> "Add Marketplace"
+- Plugins -> "+ Add Plugin" -> "Create Plugin" -> "Add Marketplace"
 - Enter `pixa-hq/pixa-plugins`
 
 2. Install the plugin
 
-- Plugins -> "+" -> "Create Plugin" -> "Add Marketplace"
-- Enter `pixa-hq/pixa-plugins`
+- Plugins -> "Browse Plugins" -> "Pixa" -> "Install"
 
 ### Claude Code CLI
 

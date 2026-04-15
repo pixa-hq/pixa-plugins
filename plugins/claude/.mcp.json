@@ -1,6 +1,6 @@
 {
     "mcpServers": {
-      "pixa-mcp": {
+      "Pixa": {
         "type": "http",
         "url": "https://mcp.pixa.com/mcp"
       }
