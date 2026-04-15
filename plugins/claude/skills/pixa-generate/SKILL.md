@@ -27,9 +27,9 @@ Parse from the user's message:
 
 ### Step 2: Find the best model
 
-**User specified a model?** → Call `pixa-mcp:models(action: "search", query: "<model name>")`.
-**No model specified?** → Call `pixa-mcp:models(action: "recommend", type: "image"|"video")`.
-**Recommend returns nothing?** → Fall back to `pixa-mcp:models(action: "list", type: "image"|"video")` and let the user pick.
+**User specified a model?** → Call `pixa:models(action: "search", query: "<model name>")`.
+**No model specified?** → Call `pixa:models(action: "recommend", type: "image"|"video")`.
+**Recommend returns nothing?** → Fall back to `pixa:models(action: "list", type: "image"|"video")` and let the user pick.
 
 If the user specifies input type (text prompt vs reference image), add `input: "text"|"image"`.
 If they need a specific aspect ratio, add `aspect_ratio: "<ratio>"`.
@@ -38,10 +38,10 @@ Present the top recommendation to the user with its name, description, and capab
 
 ### Step 3: Generate
 
-Call `pixa-mcp:generate_media`:
+Call `pixa:generate_media`:
 
 ```
-pixa-mcp:generate_media(
+pixa:generate_media(
   prompt: "<the prompt>",
   model: "<model_id from step 2>",
   aspect_ratio: "<ratio>",          # optional
@@ -58,12 +58,12 @@ The response returns immediately with:
 
 ### Step 4: Wait for completion
 
-**If the response renders a widget** (rich UI client): STOP. The widget auto-polls and displays results. Do NOT call `pixa-mcp:get_job_status`.
+**If the response renders a widget** (rich UI client): STOP. The widget auto-polls and displays results. Do NOT call `pixa:get_job_status`.
 
-**In text-only mode**: Call `pixa-mcp:get_job_status`:
+**In text-only mode**: Call `pixa:get_job_status`:
 
 ```
-pixa-mcp:get_job_status(job_id: "<job_id>", sync: true)
+pixa:get_job_status(job_id: "<job_id>", sync: true)
 ```
 
 This blocks for up to ~25 seconds. If the job is still running (common for video), call again. Repeat until status is `completed` or `failed`.
@@ -72,10 +72,10 @@ If status is `failed`, report the error message to the user and ask if they want
 
 ### Step 5: Display results
 
-Call `pixa-mcp:display` with the returned `asset_ids`:
+Call `pixa:display` with the returned `asset_ids`:
 
 ```
-pixa-mcp:display(asset_ids: ["ast_...", "ast_..."])
+pixa:display(asset_ids: ["ast_...", "ast_..."])
 ```
 
 ## Image-to-Image Generation
@@ -84,14 +84,14 @@ When the user provides a reference image:
 
 1. **Asset ID**: Pass directly in `attachments`
 2. **URL**: Pass directly in `attachments`
-3. **Local file**: First call `pixa-mcp:upload(method: "upload_url", filename: "image.jpg")`, execute the returned curl command, then use the resulting `asset_id` in `attachments`
+3. **Local file**: First call `pixa:upload(method: "upload_url", filename: "image.jpg")`, execute the returned curl command, then use the resulting `asset_id` in `attachments`
 
 When using attachments, filter models with `input: "image"` in the recommend call.
 
 ## Edge Cases
 
-- **Max 4 variations** per `pixa-mcp:generate_media` call. For more, make multiple calls.
-- **Video generation** can take minutes. Multiple `pixa-mcp:get_job_status` calls may be needed (each polls ~25s).
-- **Model ID is required**. Always call `pixa-mcp:models` first — never guess a model ID.
+- **Max 4 variations** per `pixa:generate_media` call. For more, make multiple calls.
+- **Video generation** can take minutes. Multiple `pixa:get_job_status` calls may be needed (each polls ~25s).
+- **Model ID is required**. Always call `pixa:models` first — never guess a model ID.
 - **URLs are temporary**. Always use `asset_id` for downstream operations, not URLs.
-- **Credits consumed** on generation. Check with `pixa-mcp:account` first if the user seems budget-conscious.
+- **Credits consumed** on generation. Check with `pixa:account` first if the user seems budget-conscious.

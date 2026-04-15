@@ -1,16 +1,18 @@
 {
-    "name": "pixa-plugins-marketplace",
+    "name": "pixa-plugins",
     "owner": {
       "name": "Pixa",
       "email": "prasanth@pixa.com"
     },
-    "description": "Official marketplace for Pixa plugin",
+    "metadata": {
+      "description": "Official marketplace for Pixa plugin"
+    },
     "plugins": [
       {
-        "name": "Pixa",
+        "name": "pixa",
         "source": "./plugins/claude",
         "description": "A plugin to create and edit images, video using Pixa",
-        "version": "0.0.2"
+        "version": "0.0.3"
       }
     ]
   }
