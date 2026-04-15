@@ -1,0 +1,13 @@
+{
+    "name": "pixa",
+    "description": "A plugin to create and edit images, video using Pixa",
+    "version": "0.0.1",
+    "author": {
+        "name": "Pixa",
+        "email": "mcp@pixa.com"
+    },
+    "homepage": "https://www.pixa.com",
+    "repository": "https://github.com/pixa-hq/pixa-plugins",
+    "license": "MIT",
+    "keywords": ["pixa", "image", "video", "edit", "create", "generate", "ai"]
+  }
