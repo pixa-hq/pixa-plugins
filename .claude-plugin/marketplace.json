@@ -10,7 +10,7 @@
         "name": "Pixa",
         "source": "./plugins/claude",
         "description": "A plugin to create and edit images, video using Pixa",
-        "version": "0.0.1"
+        "version": "0.0.2"
       }
     ]
   }
